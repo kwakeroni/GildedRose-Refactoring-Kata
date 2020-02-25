@@ -8,12 +8,15 @@
     <groupId>com.gildedrose</groupId>
     <artifactId>gilded-rose-kata</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <properties>
         <assertj.version>3.15.0</assertj.version>
+        <commons-csv.version>1.8</commons-csv.version>
         <commons-io.version>2.6</commons-io.version>
         <java.version>1.8</java.version>
         <junit.jupiter.version>5.5.2</junit.jupiter.version>
+        <maven.maven-shade-plugin.version>3.2.2</maven.maven-shade-plugin.version>
         <maven.maven-surefire-plugin.version>2.22.2</maven.maven-surefire-plugin.version>
     </properties>
 
@@ -23,6 +26,11 @@
             <artifactId>commons-io</artifactId>
             <version>${commons-io.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>${commons-csv.version}</version>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
@@ -46,6 +54,27 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${maven.maven-shade-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>gilded-rose</finalName>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.gildedrose.GildedRoseRunner</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
