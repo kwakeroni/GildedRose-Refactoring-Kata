@@ -15,7 +15,8 @@ public class CsvFormat {
 
     private static final CSVFormat BASE_FORMAT = CSVFormat.DEFAULT
             .withIgnoreSurroundingSpaces(true)
-            .withQuoteMode(QuoteMode.MINIMAL);
+            .withQuoteMode(QuoteMode.MINIMAL)
+            .withIgnoreHeaderCase();
 
     private static final CSVFormat INPUT_FORMAT = BASE_FORMAT.withFirstRecordAsHeader();
     private static final CSVFormat OUTPUT_FORMAT = BASE_FORMAT.withHeader(COLUMN_NAME, COLUMN_SELL_IN, COLUMN_QUALITY);
