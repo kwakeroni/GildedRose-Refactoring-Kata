@@ -38,14 +38,23 @@ class GildedRose {
         return item.name.equals("Sulfuras, Hand of Ragnaros");
     }
 
+    private boolean isConjuredItem(Item item) {
+        return item.name.toLowerCase().startsWith("conjured");
+    }
+
     private boolean isPastSellByDate(Item item) {
         return item.sellIn < 0;
     }
 
     private void degradeQuality(Item item) {
-        if (item.quality > 0) {
-            if (!isLegendaryItem(item)) {
+        if (! isLegendaryItem(item)){
+            if (isConjuredItem(item)) {
+                item.quality = item.quality - 2;
+            } else {
                 item.quality = item.quality - 1;
+            }
+            if (item.quality < 0){
+                item.quality = 0;
             }
         }
     }
