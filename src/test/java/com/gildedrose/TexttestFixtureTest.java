@@ -17,7 +17,7 @@ class TexttestFixtureTest {
     @Test
     @DisplayName("Produces expected output")
     public void testSystemOutput() throws IOException {
-        String output = captureSystemOutput(() -> TexttestFixture.main(new String[0]));
+        String output = captureSystemOutput(() -> TexttestFixture.main(new String[]{"20"}));
 
         String expected = IOUtils.toString(TexttestFixtureTest.class.getResource("TexttestFixture-expected-output.txt"), StandardCharsets.UTF_8);
         assertThat(output).isEqualTo(expected);
