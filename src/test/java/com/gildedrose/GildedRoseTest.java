@@ -31,7 +31,7 @@ class GildedRoseTest {
 
             @Test
             @DisplayName("Once the sell by date has passed, Quality degrades twice as fast (by 2)")
-            void testDoubleIncrementAfterSellByDate() {
+            void testDoubleDecrementAfterSellByDate() {
                 Item[] items = new Item[]{new Item("foo", 0, 8)};
                 GildedRose app = new GildedRose(items);
                 app.updateQuality();
@@ -71,7 +71,7 @@ class GildedRoseTest {
 
             @Test
             @DisplayName("Once the sell by date has passed, Quality degrades twice as fast (by 4)")
-            void testDoubleIncrementAfterSellByDate() {
+            void testDoubleDecrementAfterSellByDate() {
                 Item[] items = new Item[]{new Item("Conjured Balanced Budget", 0, 8)};
                 GildedRose app = new GildedRose(items);
                 app.updateQuality();
