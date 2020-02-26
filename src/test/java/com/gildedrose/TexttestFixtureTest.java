@@ -18,6 +18,6 @@ class TexttestFixtureTest {
         String output = SystemOutput.capture(() -> TexttestFixture.main(new String[]{"20"}));
 
         String expected = IOUtils.toString(TexttestFixtureTest.class.getResource("TexttestFixture-expected-output.txt"), StandardCharsets.UTF_8);
-        assertThat(output).isEqualTo(expected);
+        assertThat(output).isEqualToIgnoringNewLines(expected);
     }
 }

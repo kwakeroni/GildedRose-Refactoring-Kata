@@ -2,21 +2,21 @@ package com.gildedrose;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 public class GildedRoseRunnerTest {
 
     @Test
     @DisplayName("Runs GildedRose with command line arguments")
-    public void testRunner(@TempDir Path tempDir) throws IOException {
-        Path testFile = tempDir.resolve("input.csv");
-        Files.copy(GildedRoseRunnerTest.class.getResourceAsStream("GildedRoseRunnerTest-input.csv"), testFile);
+    public void testRunner() throws IOException {
+        Path testFile = Files.createTempFile("GildedRoseRunnerTest-input", ".csv");
+        Files.copy(GildedRoseRunnerTest.class.getResourceAsStream("GildedRoseRunnerTest-input.csv"), testFile, StandardCopyOption.REPLACE_EXISTING);
 
         String output = SystemOutput.capture(() -> GildedRoseRunner.main(testFile.toString(), "2"));
         assertThat(output.split("\\v+")).containsExactly(
